@@ -1,8 +1,3 @@
-# AdaptSign
-This repo holds codes of the paper: Improving Continuous Sign Language Recognition with Adapted Image Models. (Preprint) [[paper]](https://arxiv.org/pdf/2404.08226.pdf)
-
-This repo is based on [VAC (ICCV 2021)](https://openaccess.thecvf.com/content/ICCV2021/html/Min_Visual_Alignment_Constraint_for_Continuous_Sign_Language_Recognition_ICCV_2021_paper.html). Many thanks for their great work!
-
 ## Prerequisites
 
 - This project is implemented in Pytorch (better >=1.13 to be compatible with ctcdecode or these may exist errors). Thus please install Pytorch first.
@@ -48,21 +43,6 @@ You can choose any one of following datasets to verify the effectiveness of Adap
    cd ./preprocess
    python data_preprocess-T.py --process-image --multiprocessing
    ```
-
-### CSL dataset
-
-1. Request the CSL Dataset from this website [[download link]](https://ustc-slr.github.io/openresources/cslr-dataset-2015/index.html)
-
-2. After finishing dataset download, extract it. It is suggested to make a soft link toward downloaded dataset.   
-   `ln -s PATH_TO_DATASET ./dataset/CSL`
-
-3. The original image sequence is 1280x720, we resize it to 256x256 for augmentation. Run the following command to generate gloss dict and resize image sequence.     
-
-   ```bash
-   cd ./preprocess
-   python data_preprocess-CSL.py --process-image --multiprocessing
-   ``` 
-
 ### CSL-Daily dataset
 
 1. Request the CSL-Daily Dataset from this website [[download link]](http://home.ustc.edu.cn/~zhouh156/dataset/csl-daily/)
@@ -76,35 +56,3 @@ You can choose any one of following datasets to verify the effectiveness of Adap
    cd ./preprocess
    python data_preprocess-CSL-Daily.py --process-image --multiprocessing
    ``` 
-
-## Inference
-
-### PHOENIX2014 dataset
-
-| Backbone | Dev WER  | Test WER  | Pretrained model                                             |
-| -------- | ---------- | ----------- | --- |
-| ResNet18 | 18.5%      | 18.8%       | [[Baidu]](https://pan.baidu.com/s/1n8apnDFAQlmJvI6de4AHIg) (passwd: enyp)<br />[[Google Drive]](https://drive.google.com/file/d/1XMljSMEiN3GjkAvLBvwbBYOg6fgtPIFi/view?usp=sharing) |
-
-### PHOENIX2014-T dataset
-
-| Backbone | Dev WER  | Test WER  | Pretrained model                                             |
-| -------- | ---------- | ----------- | --- |
-| ResNet18 | 18.6%      | 18.9%       | [[Baidu]](https://pan.baidu.com/s/1R168kykOHZJ6BYuhWtkpog) (passwd: pfk1)<br />[[Google Drive]](https://drive.google.com/file/d/1ZfPbH1xgQmENEaRLEDMNJ-D9VHkKh-mg/view?usp=sharing) |
-
-### CSL-Daily dataset
-
-| Backbone | Dev WER  | Test WER  | Pretrained model                                            |
-| -------- | ---------- | ----------- | --- |
-| ResNet18 | 26.7%      | 26.3%       | [[Baidu]](https://pan.baidu.com/s/1xYOP34g8zt32klm5dffwww) (passwd: kbu4)<br />[[Google Drive]](https://drive.google.com/file/d/1Jx189JH2x7qsFprVzwOyhAEPn9mzfT7n/view?usp=sharing) |
-
-
-​	To evaluate the pretrained model, choose the dataset from phoenix2014/phoenix2014-T/CSL/CSL-Daily in line 3 in ./config/baseline.yaml first, and run the command below：   
-`python main.py --device your_device --load-weights path_to_weight.pt --phase test`
-
-### Training
-
-The priorities of configuration files are: command line > config file > default values of argparse. To train the SLR model, run the command below:
-
-`python main.py --device your_device`
-
-Note that you can choose the target dataset from phoenix2014/phoenix2014-T/CSL/CSL-Daily in line 3 in ./config/baseline.yaml.
