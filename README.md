@@ -16,8 +16,6 @@
 The implementation for CLIP and other proposed components is given in [./modules/openai/model.py](https://github.com/hulianyuyy/AdaptSign/blob/main/modules/openai/model.py).  
 
 ## Data Preparation
-You can choose any one of following datasets to verify the effectiveness of AdaptSign.
-
 ### PHOENIX2014 dataset
 1. Download the RWTH-PHOENIX-Weather 2014 Dataset [[download link]](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/). Our experiments based on phoenix-2014.v3.tar.gz.
 
