@@ -139,10 +139,6 @@ label = device.data_to_device([torch.LongTensor(label)])
 label_lgt = device.data_to_device(torch.LongTensor([len(label_list)]))
 # ret_dict = model(vid, vid_lgt, label=label, label_lgt=label_lgt)
 
-from thop import profile
-
-flops, params = profile(model, (vid,vid_lgt,label,label_lgt,))
-print("%s | %.2f | %.2f" % (name, params / (1000 ** 2), flops / (1000 ** 3)))
 
 model.zero_grad()
 # for i in range(ret_dict['sequence_logits'].size(0)):
