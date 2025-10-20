@@ -16,8 +16,8 @@ def seq_train(loader, model, optimizer, device, epoch_idx, recoder):
 
     scaler = GradScaler()
 
-    #add learn dray
-    adjust_learning_rate(optimizer.optimizer,epoch_idx)
+    
+    
     clr = [group['lr'] for group in optimizer.optimizer.param_groups]
 
     for batch_idx, data in enumerate(tqdm(loader)):
@@ -53,10 +53,9 @@ def seq_train(loader, model, optimizer, device, epoch_idx, recoder):
         #break#debug
     del ret_dict
     del loss
-    #add lr_warm
-    #adjust_learning_rate(optimizer.optimizer,epoch_idx)
+   
 
-    # optimizer.scheduler.step()#step decay
+    optimizer.scheduler.step()#step decay
     recoder.print_log('\tMean training loss: {:.10f}.'.format(np.mean(loss_value)))
     del loss_value
     del clr
@@ -176,10 +175,7 @@ def write2file(path, info, output):
                                                  word[0]))
 
 
-def adjust_learning_rate(optimizer, current_epoch, max_epoch=50, lr_min=0.000001, lr_max=0.0001, warmup=True):#max_epoch=40,lr_min=0.000004, lr_max=0.0001
-    warmup_epoch = 2 if warmup else 0
-    if current_epoch < warmup_epoch:
-        lr = lr_max * current_epoch / warmup_epoch
+
     else:
         lr = lr_min + (lr_max - lr_min) * (
                     1 + cos(pi * (current_epoch - warmup_epoch) / (max_epoch - warmup_epoch))) / 2
